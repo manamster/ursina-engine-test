@@ -3,6 +3,7 @@
 from ursina import *
 from ursina.shaders import lit_with_shadows_shader
 from ursina.prefabs.first_person_controller import *
+from noise import *
 import sys
 
 app = Ursina()
