@@ -25,7 +25,7 @@ class Player(Entity):
         gun = Entity(parent=camera, model='gun.obj', x=0.7, z=1, y=-0.2, scale=Vec3(0.4,0.4,0.4), rotation=Vec3(0,-92,0),shader=lit_with_shadows_shader)
         player.gun = gun
     #This isnt working for some reason IDK Why Ill fix it later
-    """ 
+    '''
     def input(self, key):
         if key == 'escape':
             sys.exit()
@@ -33,7 +33,11 @@ class Player(Entity):
             gun.blink(color.red)
         elif key == 'right mouse down' and player.gun:
             gun.position(0,0,0)
-    """
+    '''
+    def update(self):
+        #test will eventually put stuff here
+        pass
+
 worldclass = World()
 playerclass = Player()
 
