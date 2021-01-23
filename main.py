@@ -7,6 +7,7 @@ from ursina.prefabs.first_person_controller import *
 import sys
 
 app=Ursina()
+window.exit_button.enabled = False
 
 class World(object):
     def __init__(self):
@@ -15,17 +16,23 @@ class World(object):
         pivot=Entity()
         lightEntity = DirectionalLight(parent=pivot,y=2,z=3,shadowns=True)
     
-class Player(object):
+class Player(Entity):
     def __init__(self):
         player = FirstPersonController(model="capsule.obj", y=0, origin_y=-.5)
-        player.speed = 20
-        gun = Entity(parent=player, model='cube', x=0.5, z=1, y=1, scale=Vec3(0.4, 0.2, 1))
+        playerspeed = 10
+        player.speed = playerspeed
+        gun = Entity(parent=camera, model='cube', x=0.5, z=1, y=-0.5, scale=Vec3(0.4, 0.2, 1), shader=lit_with_shadows_shader)
         player.gun = gun
-    
+    #This isnt working for some reason IDK Why Ill fix it later
+    """ 
     def input(self, key):
         if key == 'escape':
             sys.exit()
-
+        elif key == 'left mouse down' and player.gun:
+            gun.blink(color.red)
+        elif key == 'right mouse down' and player.gun:
+            gun.position(0,0,0)
+    """
 worldclass = World()
 playerclass = Player()
 
