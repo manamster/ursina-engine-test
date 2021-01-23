@@ -3,25 +3,30 @@
 from ursina import *
 from ursina.shaders import lit_with_shadows_shader
 from ursina.prefabs.first_person_controller import *
-from noise import *
+#from noise import *
 import sys
 
-app = Ursina()
-window.exit_button.enabled = False
+app=Ursina()
 
-monkey = Entity(model='monkey.obj', color=color.light_gray, shader=lit_with_shadows_shader, collider='box', y=1, x=-2)
-ground = Entity(model='plane', scale=(100,1,100), color=color.yellow.tint(-.2), texture='white cube', texture_scale=(100,100), collider='box', shader=lit_with_shadows_shader)
+class World(object):
+    def __init__(self):
+        ground = Entity(model='plane', scale=(100,1,100), color=color.yellow.tint(-.2), texture='white cube', texture_scale=(100,100), collider='box', shader=lit_with_shadows_shader)
+        monkey = Entity(model='monkey.obj', color=color.light_gray, shader=lit_with_shadows_shader, collider='box', y=1, x=-2)
+        pivot=Entity()
+        lightEntity = DirectionalLight(parent=pivot,y=2,z=3,shadowns=True)
+    
+class Player(object):
+    def __init__(self):
+        player = FirstPersonController(model="capsule.obj", y=0, origin_y=-.5)
+        player.speed = 20
+        gun = Entity(parent=player, model='cube', x=0.5, z=1, y=1, scale=Vec3(0.4, 0.2, 1))
+        player.gun = gun
+    
+    def input(self, key):
+        if key == 'escape':
+            sys.exit()
 
-player = FirstPersonController(model="capsule.obj", y=0, origin_y=-.5)
-player.gun=None
-
-pivot=Entity()
-lightEntity = DirectionalLight(parent=pivot,y=2,z=3,shadowns=True)
-
-rotationSpeed = 40
-
-def input(key):
-    if key == 'escape':
-        sys.exit()
+worldclass = World()
+playerclass = Player()
 
 app.run()
