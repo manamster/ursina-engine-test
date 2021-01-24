@@ -3,8 +3,9 @@
 from ursina import *
 from ursina.shaders import lit_with_shadows_shader
 from ursina.prefabs.first_person_controller import *
-#from noise import *
+from noise import *
 import sys
+#import worldGen
 
 app=Ursina()
 window.exit_button.enabled = False
@@ -34,10 +35,11 @@ class Player(Entity):
         elif key == 'right mouse down' and player.gun:
             gun.position(0,0,0)
     '''
+    '''
     def update(self):
         #test will eventually put stuff here
         pass
-
+    '''
 worldclass = World()
 playerclass = Player()
 
